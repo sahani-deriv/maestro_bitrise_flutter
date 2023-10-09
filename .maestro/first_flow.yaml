@@ -1,4 +1,4 @@
-appId: com.ahrar.maestro_bitrise_flutter
+appId: com.ahrar.maestro_bitrise_flutter.dev
 name: first
 ---
 - launchApp
