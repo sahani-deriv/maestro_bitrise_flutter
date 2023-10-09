@@ -1,0 +1,6 @@
+appId: com.ahrar.maestro_bitrise_flutter
+name: second
+---
+- assertVisible: "1"
+- tapOn: remove
+- assertVisible: "0" 
