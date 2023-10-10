@@ -5,3 +5,4 @@ name: first
 - assertVisible: "0"
 - tapOn: add
 - assertVisible: "1" 
+- takeScreenshot: homePage
