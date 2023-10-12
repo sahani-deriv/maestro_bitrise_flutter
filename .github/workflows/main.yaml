@@ -1,32 +1,22 @@
-
-name: Tag and Release
-
+# example 1: on push to master
+name: Bump version
 on:
   push:
     branches:
       - master
 
 jobs:
-  tag_and_release:
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: '0'
 
-      - name: Set Git user identity
-        run: |
-          git config --global user.email "ahrar@deriv.com"
-          git config --global user.name "Ahrar"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      - name: Create Tag and Release
-        run: |
-          latest_commit=$(git rev-parse HEAD)
-          tag_name="auto-merge-$(date +'%Y%m%d%H%M%S')"  # Set the desired tag name
-          git tag -a "$tag_name" $latest_commit -m "Automated tag for release"
-          git push origin "$tag_name"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
+        WITH_V: false
