@@ -14,6 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set Git user identity
+        run: |
+          git config --global user.email "ahrar@deriv.com"
+          git config --global user.name "Ahrar"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create Tag and Release
         run: |
           latest_commit=$(git rev-parse HEAD)
