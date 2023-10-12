@@ -19,7 +19,7 @@ jobs:
           git config --global user.email "ahrar@deriv.com"
           git config --global user.name "Ahrar"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Create Tag and Release
         run: |
@@ -28,5 +28,5 @@ jobs:
           git tag -a "$tag_name" $latest_commit -m "Automated tag for release"
           git push origin "$tag_name"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
