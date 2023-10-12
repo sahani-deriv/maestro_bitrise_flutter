@@ -1,29 +1,25 @@
-name: maestro_bitrise_flutter
 
-concurrency:
-  group: $-$
-  cancel-in-progress: true
+name: Tag and Release
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - master
 
 jobs:
-  semantic-pull-request:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
+  tag_and_release:
+    runs-on: ubuntu-latest
 
-  build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    with:
-      flutter_channel: stable
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  spell-check:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
-    with:
-      includes: |
-        **/*.md
-      modified_files_only: false
+      - name: Create Tag and Release
+        run: |
+          latest_commit=$(git rev-parse HEAD)
+          tag_name="auto-merge-$(date +'%Y%m%d%H%M%S')"  # Set the desired tag name
+          git tag -a "$tag_name" $latest_commit -m "Automated tag for release"
+          git push origin "$tag_name"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
