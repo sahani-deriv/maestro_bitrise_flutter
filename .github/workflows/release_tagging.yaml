@@ -23,6 +23,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         WITH_V: true
+           
+    - name: Tag the repository
+      id: tag
+      run: |
+        TAG=v$(date -Iseconds | sed 's/[T:\+]/-/g')
+        echo "$TAG"
+        echo "tag=$TAG" >> $GITHUB_OUTPUT
 
     - name: Release
       uses: softprops/action-gh-release@v1
