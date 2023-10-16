@@ -24,15 +24,12 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         WITH_V: true
 
-    - name: Release
-      uses: softprops/action-gh-release@v1
-
-    # - name: Tagged release
-    #   uses: "marvinpinto/action-automatic-releases@latest"
-    #   with:
-    #       repo_token: "${{ secrets.GITHUB_TOKEN }}"
-    #       prerelease: false
-    #       automatic_release_tag: "latest"
-    #       files: |
-    #         LICENSE.txt
-    #         *.jar
+    - name: Tagged release
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          title: "${{ steps.tag.outputs.tag }}: [title-edit-me] by:${{ github.actor }}"
+          automatic_release_tag: ${{ steps.tag.outputs.new_tag }}
+          files: |
+            LICENSE.txt
