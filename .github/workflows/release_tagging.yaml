@@ -28,7 +28,7 @@ jobs:
           WITH_V: true
 
     - name: automatic-draft-release
-      uses: marvinpinto/action-automatic-releases@v1.2.1
+      uses: marvinpinto/action-automatic-releases@latest
       with:
           draft: false
           prerelease: false
