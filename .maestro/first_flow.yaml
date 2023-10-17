@@ -1,4 +1,4 @@
-appId: ${APP_ID}
+appId: com.ahrar.maestro-bitrise-flutter.dev
 name: first
 ---
 - launchApp
