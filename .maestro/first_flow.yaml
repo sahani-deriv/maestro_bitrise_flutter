@@ -1,8 +1,8 @@
-appId: com.ahrar.maestro_bitrise_flutter.dev
+appId: ${APP_ID}
 name: first
 ---
 - launchApp
 - assertVisible: "0"
 - tapOn: add
-- assertVisible: "1" 
+- assertVisible: "1"
 - takeScreenshot: homePage
