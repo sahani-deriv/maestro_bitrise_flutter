@@ -22,15 +22,15 @@ jobs:
       with:
           file-path: pubspec.yaml
 
-    # - name: version-tag
-    #   id: tag
-    #   uses: anothrNick/github-tag-action@master
-    #   env:
-    #       VERBOSE: true
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #       GIT_API_TAGGING: false
-    #       WITH_V: true
-    #
+    - name: version-tag
+      id: tag
+      uses: anothrNick/github-tag-action@master
+      env:
+          VERBOSE: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_API_TAGGING: false
+          WITH_V: true
+
     # - name: automatic-draft-release
     #   uses: marvinpinto/action-automatic-releases@latest
     #   with:
@@ -48,13 +48,14 @@ jobs:
       id: Changelog
       env:
           REPO: ${{ github.repository }}
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@latest
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          tag_name: ${{ steps.read-version.outputs.version-number }}
+          tag_name: ${{ steps.tag.outputs.tag }}
           release_name: Release ${{ steps.read-version.outputs.version-number }}
           body: |
             ${{ steps.Changelog.outputs.changelog }}
