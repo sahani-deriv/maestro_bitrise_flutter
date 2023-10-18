@@ -1,6 +1,6 @@
 name: maestro_bitrise_flutter
 description: UI automation test done with Maestro and test report to bitrise
-version: 1.0.0+1
+version: 1.0.0+2
 publish_to: none
 
 environment:
