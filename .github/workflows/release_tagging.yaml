@@ -17,16 +17,24 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.merge_commit_sha }}
         fetch-depth: '0'
+    - id: read-version
+      uses: NiklasLehnfeld/flutter-version-number-action@main
+      with:
+          file-path: example/pubspec.yaml
+    - uses: nick-invision/assert-action@v1
+      with:
+          expected: 0.0.1+1
+          actual: ${{ steps.read-version.outputs.version-number }}
 
-    - name: version-tag
-      id: tag
-      uses: anothrNick/github-tag-action@master
-      env:
-          VERBOSE: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_API_TAGGING: false
-          WITH_V: true
-
+    # - name: version-tag
+    #   id: tag
+    #   uses: anothrNick/github-tag-action@master
+    #   env:
+    #       VERBOSE: true
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #       GIT_API_TAGGING: false
+    #       WITH_V: true
+    #
     # - name: automatic-draft-release
     #   uses: marvinpinto/action-automatic-releases@latest
     #   with:
@@ -50,8 +58,8 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          tag_name: ${{ steps.tag.outputs.tag }}
-          release_name: Release ${{ steps.tag.outputs.tag }}
+          tag_name: ${{ steps.read-version.outputs.version-number }}
+          release_name: Release ${{ steps.read-version.outputs.version-number }}
           body: |
             ${{ steps.Changelog.outputs.changelog }}
           draft: false
