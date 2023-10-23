@@ -4,3 +4,4 @@ name: second
 - assertVisible: "1"
 - tapOn: remove
 - assertVisible: "0"
+- takeScreenshot: test_screenshots/homePage1
