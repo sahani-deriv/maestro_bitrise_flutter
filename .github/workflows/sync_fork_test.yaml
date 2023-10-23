@@ -19,8 +19,6 @@ jobs:
           head: master
           base: master
           merge_method: merge
-          pr_title: Fork Sync
-          #auto_approve: true
-          auto_merge: true
+          pr_title: automerge
           retries: 1
           retry_after: 10
