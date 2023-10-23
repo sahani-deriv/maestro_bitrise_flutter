@@ -5,6 +5,7 @@ on:
       - opened
     branches:
       - master
+  workflow_dispatch:
       
 jobs:
   automerge:
