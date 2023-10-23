@@ -20,5 +20,6 @@ jobs:
           base: master
           merge_method: merge
           pr_title: automerge
+          auto_merge: false
           retries: 1
           retry_after: 10
