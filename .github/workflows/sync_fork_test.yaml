@@ -14,7 +14,7 @@ jobs:
       - uses: tgymnich/fork-sync@v1.8
         with:
           owner: ${{ github.repository_owner }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           #personal_token: ${{ secrets.GH_TOKEN }}
           head: master
           base: master
