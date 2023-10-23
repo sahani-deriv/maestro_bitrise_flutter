@@ -1,8 +1,11 @@
 name: automerge
 on:
   pull_request:
-    types: [opened, synchronize]
-     
+    types:
+      - opened
+    branches:
+      - master
+      
 jobs:
   automerge:
     if: ${{ github.event.pull_request.title }} == "automerge"
